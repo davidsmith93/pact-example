@@ -1,0 +1,16 @@
+
+9Verifying a pact between test_consumer and test_provider
+H  [Using File ../consumer/build/pacts/test_consumer-test_provider.json]
+  Given 200 response
+  valid body
+    returns a response which
+      has status code 200 (OK)
+      has a matching body (OK)
+
+9Verifying a pact between test_consumer and test_provider
+H  [Using File ../consumer/build/pacts/test_consumer-test_provider.json]
+  Given 400 response
+  invalid body
+    returns a response which
+      has status code 400 (OK)
+      has a matching body (OK)

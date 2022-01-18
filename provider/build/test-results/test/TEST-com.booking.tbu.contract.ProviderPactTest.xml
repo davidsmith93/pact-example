@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.booking.tbu.contract.ProviderPactTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-01-18T17:19:37" hostname="C02C90TZLVDP" time="0.642">
+  <properties/>
+  <testcase name="test_consumer - valid body" classname="com.booking.tbu.contract.ProviderPactTest" time="0.59"/>
+  <testcase name="test_consumer - invalid body" classname="com.booking.tbu.contract.ProviderPactTest" time="0.05"/>
+  <system-out><![CDATA[
+Verifying a pact between test_consumer and test_provider
+  [Using File ../consumer/build/pacts/test_consumer-test_provider.json]
+  Given 200 response
+  valid body
+    returns a response which
+      has status code 200 (OK)
+      has a matching body (OK)
+
+Verifying a pact between test_consumer and test_provider
+  [Using File ../consumer/build/pacts/test_consumer-test_provider.json]
+  Given 400 response
+  invalid body
+    returns a response which
+      has status code 400 (OK)
+      has a matching body (OK)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

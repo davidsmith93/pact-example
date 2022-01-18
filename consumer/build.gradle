@@ -1,0 +1,4 @@
+dependencies {
+    testImplementation 'org.json:json:20211205'
+    testImplementation 'au.com.dius.pact.consumer:junit5:4.1.10'
+}

@@ -1,0 +1,4 @@
+dependencies {
+    testImplementation 'au.com.dius.pact.provider:junit5:4.1.10'
+    testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:2.32.0"
+}

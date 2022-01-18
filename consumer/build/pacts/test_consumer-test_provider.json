@@ -1,0 +1,251 @@
+{
+  "provider": {
+    "name": "test_provider"
+  },
+  "consumer": {
+    "name": "test_consumer"
+  },
+  "interactions": [
+    {
+      "description": "valid body",
+      "request": {
+        "method": "POST",
+        "path": "/example",
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "body": {
+          "request_number": 100,
+          "request_object": {
+            "request_boolean": true
+          },
+          "request_string": "string",
+          "request_array": [
+            100
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.request_string": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.request_number": {
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.request_object.request_boolean": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.request_array[0]": {
+              "matchers": [
+                {
+                  "match": "decimal"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.request_string": {
+              "type": "RandomString",
+              "size": 20
+            },
+            "$.request_number": {
+              "type": "RandomInt",
+              "min": 0,
+              "max": 2147483647
+            },
+            "$.request_array[0]": {
+              "type": "RandomDecimal",
+              "digits": 10
+            }
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "body": {
+          "response_string": "string",
+          "response_number": 100,
+          "response_object": {
+            "response_boolean": true
+          },
+          "response_array": [
+            100
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.response_string": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.response_number": {
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.response_object.response_boolean": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.response_array[0]": {
+              "matchers": [
+                {
+                  "match": "decimal"
+                }
+              ],
+              "combine": "AND"
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.response_string": {
+              "type": "RandomString",
+              "size": 20
+            },
+            "$.response_number": {
+              "type": "RandomInt",
+              "min": 0,
+              "max": 2147483647
+            },
+            "$.response_array[0]": {
+              "type": "RandomDecimal",
+              "digits": 10
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "200 response"
+        }
+      ]
+    },
+    {
+      "description": "invalid body",
+      "request": {
+        "method": "POST",
+        "path": "/example",
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "body": {
+          "request_number": null,
+          "request_object": {
+            "request_boolean": null
+          },
+          "request_string": null,
+          "request_array": [
+            null
+          ]
+        }
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "body": {
+          "error_string": "string",
+          "error_enum": "VALIDATION"
+        },
+        "matchingRules": {
+          "body": {
+            "$.error_enum": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "VALIDATION|UNKNOWN"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.error_string": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        },
+        "generators": {
+          "body": {
+            "$.error_string": {
+              "type": "RandomString",
+              "size": 20
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "400 response"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "4.1.10"
+    }
+  }
+}
