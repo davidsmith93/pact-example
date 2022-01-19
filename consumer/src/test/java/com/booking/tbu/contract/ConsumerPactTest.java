@@ -27,6 +27,7 @@ public class ConsumerPactTest {
             .uponReceiving("valid body")
                 .path("/example")
                 .method("POST")
+                .query("parameter=test")
                 .body(new PactDslJsonBody()
                     .stringType("request_string")
                     .numberType("request_number")
@@ -53,6 +54,7 @@ public class ConsumerPactTest {
             .uponReceiving("invalid body")
                 .path("/example")
                 .method("POST")
+                .query("parameter=test")
                 .body(new PactDslJsonBody()
                     .nullValue("request_string")
                     .stringType()
@@ -82,7 +84,7 @@ public class ConsumerPactTest {
 
     private void verify200(MockServer mockServer) throws IOException, InterruptedException {
         var client = HttpClient.newHttpClient();
-        var request = HttpRequest.newBuilder(URI.create(mockServer.getUrl() + "/example"))
+        var request = HttpRequest.newBuilder(URI.create(mockServer.getUrl() + "/example?parameter=test"))
             .method("POST", HttpRequest.BodyPublishers.ofString("""
                 {
                     "request_string": "string",
@@ -105,7 +107,7 @@ public class ConsumerPactTest {
 
     private void verify400(MockServer mockServer) throws IOException, InterruptedException {
         var client = HttpClient.newHttpClient();
-        var request = HttpRequest.newBuilder(URI.create(mockServer.getUrl() + "/example"))
+        var request = HttpRequest.newBuilder(URI.create(mockServer.getUrl() + "/example?parameter=test"))
             .method("POST", HttpRequest.BodyPublishers.ofString("""
                 {
                     "request_string": null,

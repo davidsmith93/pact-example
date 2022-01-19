@@ -2,7 +2,7 @@
 
 ## Contract
 ```
-POST - /example
+POST - /example?parameter=test
 
 Request:
 {

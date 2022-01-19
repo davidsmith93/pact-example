@@ -13,6 +13,7 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.matching.AnythingPattern;
+import com.github.tomakehurst.wiremock.matching.EqualToPattern;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,7 +59,7 @@ public class ProviderPactTest {
 
     @State("200 response")
     void verify200() {
-        wireMockExtension.stubFor(WireMock.post("/example")
+        wireMockExtension.stubFor(WireMock.post("/example?parameter=test")
             .withRequestBody(new AnythingPattern())
             .willReturn(WireMock.aResponse()
                 .withStatus(200)
@@ -80,7 +81,7 @@ public class ProviderPactTest {
 
     @State("400 response")
     void verify400() {
-        wireMockExtension.stubFor(WireMock.post("/example")
+        wireMockExtension.stubFor(WireMock.post("/example?parameter=test")
             .withRequestBody(new AnythingPattern())
             .willReturn(WireMock.aResponse()
                 .withStatus(400)
